@@ -2,18 +2,18 @@
   <div class="row">
     <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
       <h1>Reactive approach</h1>
-      <form>
+      <form [formGroup]="signupForm">
         <div class="form-group">
           <label for="username2">Username</label>
-          <input type="text" id="username2" class="form-control">
+          <input type="text" id="username2" class="form-control" formControlName="username2">
         </div>
         <div class="form-group">
           <label for="email2">email</label>
-          <input type="text" id="email2" class="form-control">
+          <input type="text" id="email2" class="form-control" formControlName="email2">
         </div>
         <div class="radio" *ngFor="let gender of genders">
           <label>
-            <input type="radio" [value]="gender">{{ gender }}
+            <input type="radio" [value]="gender" formControlName="gender">{{ gender }}
           </label>
         </div>
         <button class="btn btn-primary" type="submit">Submit</button>
