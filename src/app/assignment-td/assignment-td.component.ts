@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 @Component({
@@ -6,14 +6,10 @@ import { NgForm } from '@angular/forms';
   templateUrl: './assignment-td.component.html',
   styleUrls: ['./assignment-td.component.css']
 })
-export class AssignmentTdComponent implements OnInit {
-  @ViewChild('form') myForm: NgForm;
-  defaultSubscription = 'advanced';
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
+export class AssignmentTdComponent {
+  @ViewChild('form', { static: true }) myForm: NgForm;
+  subscriptions = ['Basic', 'Advanced', 'Pro'];
+  defaultSubscription = 'Advanced';
 
   onSubmit() {
     console.log(this.myForm.value);
