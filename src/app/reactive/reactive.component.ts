@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-reactive',
@@ -16,8 +16,10 @@ export class ReactiveComponent implements OnInit {
     // initializing my form:
     this.signupForm = new FormGroup({
       // form controls are key-value pairs in here
-      'username2': new FormControl(null),
-      'email2': new FormControl(null),
+      'username2': new FormControl(null, Validators.required),
+      // See required ei peaks olema meetodi välja kutsumine ehk required(),
+      // vaid ainult referents, et millist meetodit välja kutsuda kui input muutub.
+      'email2': new FormControl(null, [Validators.required, Validators.email]),
       'gender': new FormControl('female')
     });
   }
