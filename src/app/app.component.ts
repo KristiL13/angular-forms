@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 @Component({
@@ -7,12 +7,20 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  @ViewChild('f') signupForm: NgForm;
+
   suggestUserName() {
     const suggestedName = 'Superuser';
   }
 
-  onSubmit(form: NgForm) {
-    console.log('submitted');
-    console.log(form);
+  // onSubmit(form: NgForm) {
+  //   console.log('submitted');
+  //   console.log(form);
+  // }
+
+  // Using ViewChild here is especially useful if you need to access
+  // the data on the form also before the user actually submits it.
+  onSubmit() {
+    console.log(this.signupForm);
   }
 }
