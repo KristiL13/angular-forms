@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-reactive',
@@ -7,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReactiveComponent implements OnInit {
   genders = ['male', 'female'];
+  signupForm: FormGroup;
 
   constructor() { }
 
