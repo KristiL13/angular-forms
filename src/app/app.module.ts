@@ -5,11 +5,13 @@ import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { AssignmentTdComponent } from './assignment-td/assignment-td.component';
+import { ReactiveComponent } from './reactive/reactive.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AssignmentTdComponent
+    AssignmentTdComponent,
+    ReactiveComponent
   ],
   imports: [
     BrowserModule,
