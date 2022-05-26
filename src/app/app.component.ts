@@ -12,6 +12,15 @@ export class AppComponent {
   defaultUserName = 'mingi_nimi';
   answer = '';
   genders = ['male', 'female'];
+  // see user siin on täiesti uus JS objekt ja ei pea vastama vormile.
+  user = {
+    username: '',
+    email: '',
+    secretQuestion: '',
+    answer: '',
+    gender: ''
+  }
+  submitted = false;
 
   suggestUserName() {
     const suggestedName = 'Superuser';
@@ -51,5 +60,11 @@ export class AppComponent {
   // the data on the form also before the user actually submits it.
   onSubmit() {
     console.log(this.signupForm);
+    this.user.username = this.signupForm.value.userData.username;
+    this.user.email = this.signupForm.value.userData.email;
+    this.user.secretQuestion = this.signupForm.value.secret;
+    this.user.answer = this.signupForm.value.questionAnswer;
+    this.user.gender = this.signupForm.value.gender;
+    this.submitted = true;
   }
 }
