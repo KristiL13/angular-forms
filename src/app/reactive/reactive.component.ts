@@ -29,6 +29,14 @@ export class ReactiveComponent implements OnInit {
       'gender': new FormControl('female'),
       'hobbies': new FormArray([])
     });
+    // Siin kogu vormi muutuse kuulamine. Saab ka üksiku välja kaupa kuulata.
+    // this.signupForm.valueChanges.subscribe(
+    //   (value) => console.log(value)
+    // );
+    // Staatuse muutumise kuulamine: INVALID, PENDING, VALID
+    this.signupForm.statusChanges.subscribe(
+      (status) => console.log(status)
+    );
   }
 
   onSubmit() {
