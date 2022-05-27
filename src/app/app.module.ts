@@ -6,12 +6,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { AssignmentTdComponent } from './assignment-td/assignment-td.component';
 import { ReactiveComponent } from './reactive/reactive.component';
+import { AssignmentReactiveComponent } from './assignment-reactive/assignment-reactive.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AssignmentTdComponent,
-    ReactiveComponent
+    ReactiveComponent,
+    AssignmentReactiveComponent
   ],
   imports: [
     BrowserModule,
