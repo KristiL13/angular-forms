@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
+import { CustomValidators } from './custom-validators';
 
 @Component({
   selector: 'app-assignment-reactive',
@@ -17,8 +18,11 @@ export class AssignmentReactiveComponent implements OnInit {
     this.projectForm = new FormGroup({
       'projectName': new FormControl(null, [Validators.required
         // , this.forbiddenProjectName
-      ],
-      this.forbiddenProjectNameAsync),
+        , CustomValidators.invalidProjectName // Kui this oleks ka sees, siis jälle bindida.
+      ]
+      // , this.forbiddenProjectNameAsync
+      , CustomValidators.asyncInvalidProjectName
+      ),
       'projectEmail': new FormControl(null, [Validators.required, Validators.email]),
       'projectStatus': new FormControl('Critical')
     });
