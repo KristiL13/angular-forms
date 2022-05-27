@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-reactive',
@@ -22,11 +22,21 @@ export class ReactiveComponent implements OnInit {
         // vaid ainult referents, et millist meetodit välja kutsuda kui input muutub.
         'email2': new FormControl(null, [Validators.required, Validators.email]),
       }),
-      'gender': new FormControl('female')
+      'gender': new FormControl('female'),
+      'hobbies': new FormArray([])
     });
   }
 
   onSubmit() {
     console.log(this.signupForm);
+  }
+
+  onAddHobby() {
+    const control = new FormControl(null, Validators.required);
+    (<FormArray>this.signupForm.get('hobbies')).push(control);
+  }
+
+  getHobbyControls() {
+    return (<FormArray>this.signupForm.get('hobbies')).controls;
   }
 }
