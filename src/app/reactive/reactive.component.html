@@ -8,9 +8,12 @@
             <label for="username2">Username</label>
             <input type="text" id="username2" class="form-control" formControlName="username2">
             <span class="form-text"
-              *ngIf="!signupForm.get('userData2.username2').valid && signupForm.get('userData2.username2').touched">Please
-              enter a valid
-              username!</span>
+              *ngIf="!signupForm.get('userData2.username2').valid && signupForm.get('userData2.username2').touched">
+              <span *ngIf="signupForm.get('userData2.username2').errors['nameIsForbidden']">Please enter a valid
+                username!</span>
+              <span *ngIf="signupForm.get('userData2.username2').errors['required']">
+                This field is required!</span>
+            </span>
           </div>
           <div class="form-group">
             <label for="email2">Email</label>
