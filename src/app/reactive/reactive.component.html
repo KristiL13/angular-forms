@@ -3,18 +3,22 @@
     <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
       <h1>Reactive approach</h1>
       <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
-        <div class="form-group">
-          <label for="username2">Username</label>
-          <input type="text" id="username2" class="form-control" formControlName="username2">
-          <span class="form-text"
-            *ngIf="!signupForm.get('username2').valid && signupForm.get('username2').touched">Please enter a valid
-            username!</span>
-        </div>
-        <div class="form-group">
-          <label for="email2">Email</label>
-          <input type="text" id="email2" class="form-control" formControlName="email2">
-          <span class="form-text" *ngIf="!signupForm.get('email2').valid && signupForm.get('email2').touched">Please
-            enter a valid email address!</span>
+        <div formGroupName="userData2">
+          <div class="form-group">
+            <label for="username2">Username</label>
+            <input type="text" id="username2" class="form-control" formControlName="username2">
+            <span class="form-text"
+              *ngIf="!signupForm.get('userData2.username2').valid && signupForm.get('userData2.username2').touched">Please
+              enter a valid
+              username!</span>
+          </div>
+          <div class="form-group">
+            <label for="email2">Email</label>
+            <input type="text" id="email2" class="form-control" formControlName="email2">
+            <span class="form-text"
+              *ngIf="!signupForm.get('userData2.email2').valid && signupForm.get('userData2.email2').touched">Please
+              enter a valid email address!</span>
+          </div>
         </div>
         <div class="radio" *ngFor="let gender of genders">
           <label>
