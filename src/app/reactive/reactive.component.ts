@@ -9,6 +9,7 @@ import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 export class ReactiveComponent implements OnInit {
   genders = ['male', 'female'];
   signupForm: FormGroup;
+  forbiddenUsernames = ['Chris', 'Anna'];
 
   constructor() { }
 
@@ -17,7 +18,7 @@ export class ReactiveComponent implements OnInit {
     this.signupForm = new FormGroup({
       // form controls are key-value pairs in here
       'userData2': new FormGroup({
-        'username2': new FormControl(null, Validators.required),
+        'username2': new FormControl(null,[ Validators.required, this.forbiddenNames.bind(this)]),
         // See required ei peaks olema meetodi välja kutsumine ehk required(),
         // vaid ainult referents, et millist meetodit välja kutsuda kui input muutub.
         'email2': new FormControl(null, [Validators.required, Validators.email]),
@@ -38,5 +39,14 @@ export class ReactiveComponent implements OnInit {
 
   getHobbyControls() {
     return (<FormArray>this.signupForm.get('hobbies')).controls;
+  }
+
+  // custom made validator. returns key-value pair, where key is string and value is boolean
+  forbiddenNames(control: FormControl): {[s: string]: boolean} {
+    if (this.forbiddenUsernames.indexOf(control.value) !== -1) {
+      return {'nameIsForbidden': true}; 
+    }
+    return null; // kui Validation on edukas, siis tuleb tagastada null või mitte midagi.
+    // false tagastamine ei toimiks valideerimisel.
   }
 }
