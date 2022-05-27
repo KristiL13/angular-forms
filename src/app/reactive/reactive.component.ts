@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-reactive',
@@ -21,7 +22,9 @@ export class ReactiveComponent implements OnInit {
         'username2': new FormControl(null,[ Validators.required, this.forbiddenNames.bind(this)]),
         // See required ei peaks olema meetodi välja kutsumine ehk required(),
         // vaid ainult referents, et millist meetodit välja kutsuda kui input muutub.
-        'email2': new FormControl(null, [Validators.required, Validators.email]),
+        // Kolmas parameeter on Async validator või nende Array. Kuna forbiddenEmails
+        // funktsiooni sisu ei sisalda this-i, siis ei pea bindima.
+        'email2': new FormControl(null, [Validators.required, Validators.email], this.forbiddenEmails),
       }),
       'gender': new FormControl('female'),
       'hobbies': new FormArray([])
@@ -48,5 +51,20 @@ export class ReactiveComponent implements OnInit {
     }
     return null; // kui Validation on edukas, siis tuleb tagastada null või mitte midagi.
     // false tagastamine ei toimiks valideerimisel.
+  }
+
+  // Creating custom Async validator.
+  // Valideerimise ootamise ajal on väljal klass ng-pending.
+  forbiddenEmails(control: FormControl): Promise<any> | Observable<any> {
+    const promise = new Promise<any>((resolve, reject) => {
+      setTimeout(() => {
+        if (control.value === 'test@test.com') {
+          resolve({'emailIsForbidden': true});
+        } else {
+          resolve(null);
+        }
+      }, 1500);
+    });
+    return promise;
   }
 }
