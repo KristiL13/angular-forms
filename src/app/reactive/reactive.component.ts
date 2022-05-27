@@ -37,10 +37,28 @@ export class ReactiveComponent implements OnInit {
     this.signupForm.statusChanges.subscribe(
       (status) => console.log(status)
     );
+    // Saab ka kasutada setValue() ja patchValue() meetodeid.
+    this.signupForm.setValue({
+      'userData2': {
+        'username2': 'Kristi',
+        'email2': 'mingi@kiri.ee'
+      },
+      'gender': 'female',
+      'hobbies': []
+    });
+    this.signupForm.patchValue({
+      'userData2': {
+        'username2': 'Anna',
+      },
+    });
   }
-
+  
   onSubmit() {
     console.log(this.signupForm);
+    // You can pass an object to reset() to reset to specific values.
+    this.signupForm.reset({
+      'gender': 'male'
+    });
   }
 
   onAddHobby() {
